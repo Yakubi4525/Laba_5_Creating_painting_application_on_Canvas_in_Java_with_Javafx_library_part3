@@ -118,20 +118,20 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="text_button" minWidth="51.0" mnemonicParsing="false" onAction="#text_draw" prefHeight="49.0" prefWidth="51.0" style="-fx-background-color: #ffffff;" textFill="TRANSPARENT">
+            <Button fx:id="text_button" minWidth="51.0" mnemonicParsing="false" onAction="#rect_draw" prefHeight="49.0" prefWidth="51.0" style="-fx-background-color: #ffffff;" textFill="TRANSPARENT">
                <graphic>
                   <ImageView fitHeight="47.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@drawing_icons/text.png" />
+                        <Image url="@drawing_icons/square.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="ruler_button" minWidth="51.0" mnemonicParsing="false" onAction="#ruler_func" prefHeight="49.0" prefWidth="51.0" style="-fx-background-color: #ffffff;" textFill="TRANSPARENT">
+            <Button fx:id="ruler_button" minWidth="51.0" mnemonicParsing="false" onAction="#romb_draw" prefHeight="49.0" prefWidth="51.0" style="-fx-background-color: #ffffff;" textFill="TRANSPARENT">
                <graphic>
                   <ImageView fitHeight="47.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@drawing_icons/rulet.png" />
+                        <Image url="@drawing_icons/romb.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -154,7 +154,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="rect_button" minWidth="51.0" mnemonicParsing="false" onAction="#rect_draw" prefHeight="49.0" prefWidth="51.0" style="-fx-background-color: #ffffff;" textFill="TRANSPARENT">
+            <Button fx:id="rect_button" minWidth="51.0" mnemonicParsing="false" onAction="#square_draw" prefHeight="49.0" prefWidth="51.0" style="-fx-background-color: #ffffff;" textFill="TRANSPARENT">
                <graphic>
                   <ImageView fitHeight="47.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -172,11 +172,11 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="poligon_button" minWidth="51.0" mnemonicParsing="false" onAction="#poigon_draw" prefHeight="49.0" prefWidth="51.0" style="-fx-background-color: #ffffff;" textFill="TRANSPARENT">
+            <Button fx:id="poligon_button" minWidth="51.0" mnemonicParsing="false" onAction="#ellips_draw" prefHeight="49.0" prefWidth="51.0" style="-fx-background-color: #ffffff;" textFill="TRANSPARENT">
                <graphic>
                   <ImageView fitHeight="47.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@drawing_icons/poligon.png" />
+                        <Image url="@drawing_icons/ellips.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -198,12 +198,12 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="476.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fill="WHITE" layoutX="476.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rect">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="536.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ruler">
+      <Text fill="WHITE" layoutX="536.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Romb">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -218,7 +218,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="742.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rect">
+      <Text fill="WHITE" layoutX="730.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Square">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -228,7 +228,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="859.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Poligon">
+      <Text fill="WHITE" layoutX="869.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ellips">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

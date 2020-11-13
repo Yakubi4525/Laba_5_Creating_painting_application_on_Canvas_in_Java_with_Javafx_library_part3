@@ -25,20 +25,27 @@ import java.util.Random;
 
 public class Controller {
     public String choosing_figure;
+    public Square square;
+    public Square choosedsquare;
     public Rectangle rect;
-    public Rectangle choosed_rectangle;
+    public Rectangle choosed_rect;
+    public Romb romb;
+    public Romb choosed_romb;
     public Oval oval;
     public Oval choosed_oval;
+    public Ellips ellips;
+    public Ellips choosed_ellips;
     public Line line;
     public Line choosed_line;
     List<Object> listOfShapes = new ArrayList<>();
-    private ArrayList<Rectangle> rectangleList = new ArrayList<>();
+    private ArrayList<Square> rectangleList = new ArrayList<>();
+    private ArrayList<Romb> rombList = new ArrayList<>();
     private ArrayList<Oval> ovalList = new ArrayList<>();
+    private ArrayList<Ellips> ellipsList = new ArrayList<>();
     private ArrayList<Line> lineList = new ArrayList<>();
 
 
-    DropShadow borderEffect = new DropShadow(BlurType.THREE_PASS_BOX, Color.WHITE, 0, 0, 0, 0);
-    DropShadow coloredBorderEffect = new DropShadow(BlurType.THREE_PASS_BOX, Color.BLACK, 2, 1, 0, 0);
+
     public GraphicsContext gc;
     private String tool_selected="None";
     public double show_x;
@@ -170,15 +177,35 @@ public class Controller {
     }
     public void chooseshape(double point_x, double point_y){
         for(int i = listOfShapes.size()-1 ; i >= 0; i--){
-            if(listOfShapes.get(i) instanceof Rectangle){
-                rect=(Rectangle) listOfShapes.get(i);
-                if(rect.getShow_x()<point_x &&point_x<rect.getShow_x()+rect.getSize()&&rect.getShow_y()<point_y &&point_y<rect.getShow_y()+rect.getSize())
+            if((listOfShapes.get(i) instanceof Romb )&&((Romb) listOfShapes.get(i)).getName()=="Romb"){
+                romb=(Romb) listOfShapes.get(i);
+                if(((point_x-romb.getX())*(romb.getY()+romb.getSize()/2-romb.getY())-(point_y-romb.getY())*(romb.getX()-romb.getSize()/2-romb.getX())==0 && ((romb.getX()<point_x && point_x<romb.getX()-romb.getSize()/2))||(romb.getX()>point_x && point_x>romb.getX()-romb.getSize()/2))||
+
+                        ((point_x-romb.getX())*(romb.getY()+romb.getSize()/2)-(point_y-romb.getY())*(romb.getX()-romb.getSize()/2-romb.getX())==0 && ((romb.getX()<point_x && point_x<romb.getX()-romb.getSize()/2))||(romb.getX()>point_x && point_x>romb.getX()-romb.getSize()/2))
+
+                )
+
                 {
-                    choosing_figure="Rectangle";
-                    if(choosed_rectangle!=null) {
-                        choosed_rectangle.white_border(gc);
-                        choosed_rectangle.show(gc);
+                    choosing_figure="Romb";
+                    System.out.println("Romb selected");
+                    if(choosed_ellips!=null) {
+                        choosed_ellips.white_border(gc);
+                        choosed_ellips.show(gc);
                     }
+                    if(choosed_rect!=null) {
+                        choosed_rect.white_border(gc);
+                        choosed_rect.show(gc);
+                    }
+                    if(choosed_romb!=null) {
+                        choosed_romb.white_border(gc);
+                        choosed_romb.show(gc);
+                    }
+
+                    if(choosedsquare!=null) {
+                        choosedsquare.white_border(gc);
+                        choosedsquare.show(gc);
+                    }
+
                     if(choosed_oval!=null) {
                         choosed_oval.white_border(gc);
                         choosed_oval.show(gc);
@@ -187,32 +214,133 @@ public class Controller {
                         choosed_line.white_border(gc);
                         choosed_line.show(gc);
                     }
-                            double x=rect.getShow_x();
-                            double y=rect.getShow_y();
-                            double size=rect.getSize();
-                            Color color=rect.getColor();
-                            listOfShapes.remove(rect);
-                            this.choosed_rectangle = new Rectangle(x,y,size,color);
-                            this.choosed_rectangle.black_border(gc);
-                            this.choosed_rectangle.show(gc);
-                            listOfShapes.add(this.choosed_rectangle);
+                    double x=romb.getX();
+                    double y=romb.getY();
+                    double size=romb.getSize();
+                    Color color=romb.getColor();
+                    listOfShapes.remove(romb);
+                    this.choosed_romb = new Romb(x,y,size,color);
+                    this.choosed_romb.black_border(gc);
+                    this.choosed_romb.show(gc);
+                    listOfShapes.add(this.choosed_romb);
+                    break;
+
+                }
+            }
+
+            if(listOfShapes.get(i) instanceof Rectangle){
+                rect=(Rectangle) listOfShapes.get(i);
+                if(rect.getX()<point_x &&point_x<rect.getX()+rect.getSize2()&&rect.getY()<point_y &&point_y<rect.getY()+rect.getSize())
+                {
+                    choosing_figure="Rectangle";
+                    if(choosed_ellips!=null) {
+                        choosed_ellips.white_border(gc);
+                        choosed_ellips.show(gc);
+                    }
+                    if(choosed_rect!=null) {
+                        choosed_rect.white_border(gc);
+                        choosed_rect.show(gc);
+                    }
+                    if(choosed_romb!=null) {
+                        choosed_romb.white_border(gc);
+                        choosed_romb.show(gc);
+                    }
+
+                    if(choosedsquare!=null) {
+                        choosedsquare.white_border(gc);
+                        choosedsquare.show(gc);
+                    }
+
+                    if(choosed_oval!=null) {
+                        choosed_oval.white_border(gc);
+                        choosed_oval.show(gc);
+                    }
+                    if(choosed_line!=null) {
+                        choosed_line.white_border(gc);
+                        choosed_line.show(gc);
+                    }
+                    double x=rect.getX();
+                    double y=rect.getY();
+                    double size=rect.getSize();
+                    Color color=rect.getColor();
+                    listOfShapes.remove(rect);
+                    this.choosed_rect = new Rectangle(x,y,size,color);
+                    this.choosed_rect.black_border(gc);
+                    this.choosed_rect.show(gc);
+                    listOfShapes.add(this.choosed_rect);
+                    break;
+
+                }
+            }
+
+            if((listOfShapes.get(i) instanceof Square) && ((Square) listOfShapes.get(i)).getName()=="Square"){
+                square=(Square) listOfShapes.get(i);
+                if(square.getX()<point_x &&point_x<square.getX()+square.getSize()&&square.getY()<point_y &&point_y<square.getY()+square.getSize())
+                {
+                    choosing_figure="Square";
+                    System.out.println("Square selected");
+                    if(choosed_ellips!=null) {
+                        choosed_ellips.white_border(gc);
+                        choosed_ellips.show(gc);
+                    }
+                    if(choosed_rect!=null) {
+                        choosed_rect.white_border(gc);
+                        choosed_rect.show(gc);
+                    }
+                    if(choosed_romb!=null) {
+                        choosed_romb.white_border(gc);
+                        choosed_romb.show(gc);
+                    }
+
+                    if(choosedsquare!=null) {
+                        choosedsquare.white_border(gc);
+                        choosedsquare.show(gc);
+                    }
+
+                    if(choosed_oval!=null) {
+                        choosed_oval.white_border(gc);
+                        choosed_oval.show(gc);
+                    }
+                    if(choosed_line!=null) {
+                        choosed_line.white_border(gc);
+                        choosed_line.show(gc);
+                    }
+                            double x=square.getX();
+                            double y=square.getY();
+                            double size=square.getSize();
+                            Color color=square.getColor();
+                            listOfShapes.remove(square);
+                            this.choosedsquare = new Square(x,y,size,color);
+                            this.choosedsquare.black_border(gc);
+                            this.choosedsquare.show(gc);
+                            listOfShapes.add(this.choosedsquare);
                             break;
 
                 }
             }
-            if(listOfShapes.get(i) instanceof Oval){
-                oval=(Oval)listOfShapes.get(i);
-                System.out.println(Math.sqrt(Math.pow(point_x-(oval.getShow_x()+oval.getSize()/2),2.0)+Math.pow(point_y-oval.getShow_y()+oval.getSize()/2,2.0))<(oval.getSize()/2));
-                System.out.println(Math.sqrt(Math.pow(point_x-(oval.getShow_x()+oval.getSize()/2),2.0)+Math.pow(point_y-oval.getShow_y()+oval.getSize()/2,2.0)));
-                if(Math.sqrt(Math.pow(point_x-(oval.getShow_x()+oval.getSize()/2),2.0)+Math.pow(point_y-(oval.getShow_y()+oval.getSize()/2),2.0))<(oval.getSize()/2))
+            if(listOfShapes.get(i) instanceof Ellips){
+                ellips=(Ellips)listOfShapes.get(i);
+                if(Math.sqrt(Math.pow(point_x-(ellips.getX()+ellips.getSize()/2),2.0)+Math.pow(point_y-(ellips.getY()+ellips.getSize()/2),2.0))<(ellips.getSize2()/2))
                 {
-                    choosing_figure="Oval";
-
-
-                    if(choosed_rectangle!=null) {
-                        choosed_rectangle.white_border(gc);
-                        choosed_rectangle.show(gc);
+                    choosing_figure="Ellips";
+                    if(choosed_ellips!=null) {
+                        choosed_ellips.white_border(gc);
+                        choosed_ellips.show(gc);
                     }
+                    if(choosed_rect!=null) {
+                        choosed_rect.white_border(gc);
+                        choosed_rect.show(gc);
+                    }
+                    if(choosed_romb!=null) {
+                        choosed_romb.white_border(gc);
+                        choosed_romb.show(gc);
+                    }
+
+                    if(choosedsquare!=null) {
+                        choosedsquare.white_border(gc);
+                        choosedsquare.show(gc);
+                    }
+
                     if(choosed_oval!=null) {
                         choosed_oval.white_border(gc);
                         choosed_oval.show(gc);
@@ -221,13 +349,59 @@ public class Controller {
                         choosed_line.white_border(gc);
                         choosed_line.show(gc);
                     }
-                    double x=oval.getShow_x();
-                    double y=oval.getShow_y();
+                    double x=ellips.getX();
+                    double y=ellips.getY();
+                    double size=ellips.getSize();
+                    Color color=ellips.getColor();
+                    listOfShapes.remove(ellips);
+                    this.choosed_ellips = new Ellips(x,y,size,color);
+                    this.choosed_ellips.black_border(gc);
+                    this.choosed_ellips.show(gc);
+                    listOfShapes.add(this.choosed_ellips);
+                    break;
+
+                }
+            }
+
+            if(listOfShapes.get(i) instanceof Oval){
+                oval=(Oval)listOfShapes.get(i);
+                if(Math.sqrt(Math.pow(point_x-(oval.getX()+oval.getSize()/2),2.0)+Math.pow(point_y-(oval.getY()+oval.getSize()/2),2.0))<(oval.getSize()/2))
+                {
+                    choosing_figure="Oval";
+
+                    if(choosed_ellips!=null) {
+                        choosed_ellips.white_border(gc);
+                        choosed_ellips.show(gc);
+                    }
+                    if(choosed_rect!=null) {
+                        choosed_rect.white_border(gc);
+                        choosed_rect.show(gc);
+                    }
+                    if(choosed_romb!=null) {
+                        choosed_romb.white_border(gc);
+                        choosed_romb.show(gc);
+                    }
+
+                    if(choosedsquare!=null) {
+                        choosedsquare.white_border(gc);
+                        choosedsquare.show(gc);
+                    }
+
+                    if(choosed_oval!=null) {
+                        choosed_oval.white_border(gc);
+                        choosed_oval.show(gc);
+                    }
+                    if(choosed_line!=null) {
+                        choosed_line.white_border(gc);
+                        choosed_line.show(gc);
+                    }
+                    double x=oval.getX();
+                    double y=oval.getY();
                     double size=oval.getSize();
                     Color color=oval.getColor();
                     listOfShapes.remove(oval);
                     this.choosed_oval = new Oval(x,y,size,color);
-                    this.oval.black_border(gc);
+                    this.choosed_oval.black_border(gc);
                     this.choosed_oval.show(gc);
                     listOfShapes.add(this.choosed_oval);
                     break;
@@ -236,13 +410,27 @@ public class Controller {
             }
             if(listOfShapes.get(i) instanceof Line){
                 line=(Line) listOfShapes.get(i);
-                if(line.getShow_x()<point_x &&point_x<line.getShow_x()+4&&line.getShow_y()<point_y &&point_y<line.getShow_y()+line.getSize())
+                if(line.getX()<point_x &&point_x<line.getX()+4&&line.getY()<point_y &&point_y<line.getY()+line.getSize())
                 {
                     choosing_figure="Line";
-                    if(choosed_rectangle!=null) {
-                        choosed_rectangle.white_border(gc);
-                        choosed_rectangle.show(gc);
+                    if(choosed_ellips!=null) {
+                        choosed_ellips.white_border(gc);
+                        choosed_ellips.show(gc);
                     }
+                    if(choosed_rect!=null) {
+                        choosed_rect.white_border(gc);
+                        choosed_rect.show(gc);
+                    }
+                    if(choosed_romb!=null) {
+                        choosed_romb.white_border(gc);
+                        choosed_romb.show(gc);
+                    }
+
+                    if(choosedsquare!=null) {
+                        choosedsquare.white_border(gc);
+                        choosedsquare.show(gc);
+                    }
+
                     if(choosed_oval!=null) {
                         choosed_oval.white_border(gc);
                         choosed_oval.show(gc);
@@ -251,8 +439,8 @@ public class Controller {
                         choosed_line.white_border(gc);
                         choosed_line.show(gc);
                     }
-                    double x=line.getShow_x();
-                    double y=line.getShow_y();
+                    double x=line.getX();
+                    double y=line.getY();
                     double size=line.getSize();
                     Color color=line.getColor();
                     listOfShapes.remove(line);
@@ -267,7 +455,6 @@ public class Controller {
         }
     }
 
-    Random random = new Random();
 
 
     @FXML
@@ -299,12 +486,18 @@ public class Controller {
     void fIll_color(ActionEvent event) {
         tool_selected="fill_color_selected";
         dialog.setText("Fill Color tool selected");
-        if (choosing_figure=="Rectangle"&&choosed_rectangle!=null)
+        if (choosing_figure=="Rectangle"&&choosedsquare!=null)
         {
-            listOfShapes.remove(choosed_rectangle);
-            choosed_rectangle.setColor(colorpicker.getValue());
-            choosed_rectangle.show(gc);
-            listOfShapes.add(choosed_rectangle);
+            listOfShapes.remove(choosedsquare);
+            choosedsquare.setColor(colorpicker.getValue());
+            choosedsquare.show(gc);
+            listOfShapes.add(choosedsquare);
+        }
+        if (choosing_figure=="Line"&&choosed_line!=null) {
+            listOfShapes.remove(choosed_line);
+            choosed_line.setColor(colorpicker.getValue());
+            choosed_line.show(gc);
+            listOfShapes.add(choosed_line);
         }
         if (choosing_figure=="Oval"&&choosed_oval!=null)
         {
@@ -314,7 +507,6 @@ public class Controller {
             listOfShapes.add(choosed_oval);
         }
         if (choosing_figure=="Line"&&choosed_line!=null) {
-
             listOfShapes.remove(choosed_line);
             choosed_line.setColor(colorpicker.getValue());
             choosed_line.show(gc);
@@ -339,6 +531,12 @@ public class Controller {
         dialog.setText("Oval tool selected");
 
     }
+    @FXML
+    void ellips_draw(ActionEvent event) {
+        tool_selected="ellips_selected";
+        dialog.setText("Ellips tool selected");
+
+    }
 
     @FXML
     void poigon_draw(ActionEvent event) {
@@ -353,20 +551,21 @@ public class Controller {
         dialog.setText("Rect tool selected");
 
     }
-
     @FXML
-    void ruler_func(ActionEvent event) {
-        tool_selected="ruler_selected";
-        dialog.setText("Ruler tool selected");
+    void square_draw(ActionEvent event) {
+        tool_selected="square_selected";
+        dialog.setText("Square tool selected");
 
     }
 
     @FXML
-    void text_draw(ActionEvent event) {
-        tool_selected="text_selected";
-        dialog.setText("Text tool selected");
+    void romb_draw(ActionEvent event) {
+        tool_selected="romb_selected";
+        dialog.setText("Romb tool selected");
 
     }
+
+
 
     @FXML
     void draw_pen(ActionEvent event) {
@@ -396,6 +595,30 @@ public class Controller {
                 dialog.setText("Select any tool!!!");
                 break;
 
+            case "square_selected":
+                if (show_cordinate_x.getText().equals("") && show_cordinate_y.getText().equals("") && size_line.getText().equals("5")) {
+                    Square square = new Square();
+                    square.white_border(gc);
+                    square.show(gc);
+                    System.out.println("Square creatd");
+                    listOfShapes.add(square);
+                    rectangleList.add(square);
+
+
+                } else {
+                    show_x = Double.parseDouble(show_cordinate_x.getText());
+                    show_y = Double.parseDouble(show_cordinate_y.getText());
+                    size = Double.parseDouble(size_line.getText());
+                    Color color = colorpicker.getValue();
+                    Square square = new Square(show_x, show_y, size, color);
+                    square.white_border(gc);
+                    square.show(gc);
+                    listOfShapes.add(square);
+                    rectangleList.add(square);
+
+                }
+
+                break;
             case "rect_selected":
                 if (show_cordinate_x.getText().equals("") && show_cordinate_y.getText().equals("") && size_line.getText().equals("5")) {
                     Rectangle rect = new Rectangle();
@@ -420,16 +643,36 @@ public class Controller {
                 }
 
                 break;
+            case "romb_selected":
+                if (show_cordinate_x.getText().equals("") && show_cordinate_y.getText().equals("") && size_line.getText().equals("5")) {
+                    Romb romb = new Romb();
+                    romb.white_border(gc);
+                    romb.show(gc);
+                    System.out.println("Romb created");
+                    listOfShapes.add(romb);
+                    rombList.add(romb);
+
+
+                } else {
+                    show_x = Double.parseDouble(show_cordinate_x.getText());
+                    show_y = Double.parseDouble(show_cordinate_y.getText());
+                    size = Double.parseDouble(size_line.getText());
+                    Color color = colorpicker.getValue();
+                    Romb romb = new Romb(show_x, show_y, size, color);
+                    romb.white_border(gc);
+                    romb.show(gc);
+                    listOfShapes.add(romb);
+                    rombList.add(romb);
+
+                }
+
+                break;
             case "oval_selected":
                 if (show_cordinate_x.getText().equals("") && show_cordinate_y.getText().equals("") && size_line.getText().equals("5")) {
                     Oval oval = new Oval();
                     oval.white_border(gc);
                     oval.show(gc);
                     System.out.println("Oval creatd");
-                    System.out.println("ovalx:" + oval.getShow_x());
-                    System.out.println("ovaly:" + oval.getShow_y());
-                    System.out.println("ovalsize:" + oval.getSize());
-
                     listOfShapes.add(oval);
                     ovalList.add(oval);
 
@@ -443,11 +686,33 @@ public class Controller {
                     Oval oval = new Oval(show_x, show_y, 2 * size, color);
                     oval.white_border(gc);
                     oval.show(gc);
-                    System.out.println("ovalx:" + oval.getShow_x());
-                    System.out.println("ovaly:" + oval.getShow_y());
-                    System.out.println("ovalsize:" + oval.getSize());
                     listOfShapes.add(oval);
                     ovalList.add(oval);
+
+                }
+
+                break;
+            case "ellips_selected":
+                if (show_cordinate_x.getText().equals("") && show_cordinate_y.getText().equals("") && size_line.getText().equals("5")) {
+                    Ellips ellips = new Ellips();
+                    ellips.white_border(gc);
+                    ellips.show(gc);
+                    System.out.println("Ellips creatd");
+                    listOfShapes.add(ellips);
+                    ovalList.add(ellips);
+
+
+                } else {
+                    size = Double.parseDouble(size_line.getText());
+                    show_x = Double.parseDouble(show_cordinate_x.getText()) - size;
+                    show_y = Double.parseDouble(show_cordinate_y.getText()) - size;
+
+                    Color color = colorpicker.getValue();
+                    Ellips ellips = new Ellips(show_x, show_y, 2 * size, color);
+                    ellips.white_border(gc);
+                    ellips.show(gc);
+                    listOfShapes.add(ellips);
+                    ovalList.add(ellips);
 
                 }
 
@@ -491,23 +756,35 @@ public class Controller {
 
         }
         switch(choosing_figure){
-            case "Rectangle":
-                choosed_rectangle.white_border(gc);
-                listOfShapes.remove(choosed_rectangle);
-                choosed_rectangle.MoveTo(move_x, move_y, gc);
-                listOfShapes.add(choosed_rectangle);
+            case "Square":
+                listOfShapes.remove(choosedsquare);
+                choosedsquare.MoveTo(move_x, move_y, gc);
+                listOfShapes.add(choosedsquare);
                 break;
             case "Oval":
-                choosed_oval.white_border(gc);
                 listOfShapes.remove(choosed_oval);
                 choosed_oval.MoveTo(move_x, move_y, gc);
                 listOfShapes.add(choosed_oval);
                 break;
             case "Line":
-                choosed_line.white_border(gc);
                 listOfShapes.remove(choosed_line);
                 choosed_line.MoveTo(move_x, move_y, gc);
                 listOfShapes.add(choosed_line);
+                break;
+            case "Ellips":
+                listOfShapes.remove(choosed_ellips);
+                choosed_ellips.MoveTo(move_x, move_y, gc);
+                listOfShapes.add(choosed_ellips);
+                break;
+                case "Romb":
+                listOfShapes.remove(choosed_romb);
+                choosed_romb.MoveTo(move_x, move_y, gc);
+                listOfShapes.add(choosed_romb);
+                break;
+                case "Rectangle":
+                listOfShapes.remove(choosed_rect);
+                choosed_rect.MoveTo(move_x, move_y, gc);
+                listOfShapes.add(choosed_rect);
                 break;
 
         }
@@ -533,21 +810,54 @@ public class Controller {
         for (int i=0; i<listOfShapes.size()-1; i++){
             if (listOfShapes.get(i) instanceof Rectangle){
                 rect=(Rectangle) listOfShapes.get(i);
+                rect.white_border(gc);
                 rect.show(gc);
+            }
+            if (listOfShapes.get(i) instanceof Romb){
+                romb=(Romb) listOfShapes.get(i);
+                romb.white_border(gc);
+                romb.show(gc);
+            }
+            if (listOfShapes.get(i) instanceof Square){
+                square=(Square) listOfShapes.get(i);
+                square.white_border(gc);
+                square.show(gc);
+            }
+            if (listOfShapes.get(i) instanceof Ellips){
+                ellips=(Ellips)listOfShapes.get(i);
+                ellips.white_border(gc);
+                ellips.show(gc);
             }
             if (listOfShapes.get(i) instanceof Oval){
                 oval=(Oval)listOfShapes.get(i);
+                oval.white_border(gc);
                 oval.show(gc);
             }
             if (listOfShapes.get(i) instanceof Line){
                 line=(Line)listOfShapes.get(i);
+                line.white_border(gc);
                 line.show(gc);
             }
         }
         if (listOfShapes.get(listOfShapes.size()-1) instanceof Rectangle){
             rect=(Rectangle) listOfShapes.get(listOfShapes.size()-1);
-            rect.black_border(gc);
+            square.black_border(gc);
             rect.show(gc);
+        }
+        if (listOfShapes.get(listOfShapes.size()-1) instanceof Romb){
+            romb=(Romb) listOfShapes.get(listOfShapes.size()-1);
+            square.black_border(gc);
+            romb.show(gc);
+        }
+        if (listOfShapes.get(listOfShapes.size()-1) instanceof Square){
+            square=(Square) listOfShapes.get(listOfShapes.size()-1);
+            square.black_border(gc);
+            square.show(gc);
+        }
+        if (listOfShapes.get(listOfShapes.size()-1) instanceof Ellips){
+            ellips=(Ellips)listOfShapes.get(listOfShapes.size()-1);
+            oval.black_border(gc);
+            ellips.show(gc);
         }
         if (listOfShapes.get(listOfShapes.size()-1) instanceof Oval){
             oval=(Oval)listOfShapes.get(listOfShapes.size()-1);
@@ -560,9 +870,5 @@ public class Controller {
             line.show(gc);
         }
     }
-    void update_rectangle(){
-        for (Rectangle rect: rectangleList){
-            rect.show(gc);
-        }
-    }
+
 }
