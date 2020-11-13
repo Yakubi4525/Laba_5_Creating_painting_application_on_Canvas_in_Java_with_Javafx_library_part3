@@ -272,6 +272,7 @@ public class Controller {
 
     @FXML
     void eraser_draw(ActionEvent event) {
+        System.out.println("1");
         tool_selected="eraser_selected";
         dialog.setText("Eraser tool selected");
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED,
