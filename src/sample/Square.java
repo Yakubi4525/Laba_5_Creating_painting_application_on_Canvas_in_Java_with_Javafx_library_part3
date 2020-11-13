@@ -49,12 +49,7 @@ public class Square extends TFigure {
         gc.fillRect(0, 0, 881, 487);
 
     }
-    public void MoveTo(double x, double y,GraphicsContext gc){
-        delete(gc);
-        setX(getX()+x);
-        setY(getY()+y);
 
-    }
     public void black_border(GraphicsContext gc){
         DropShadow coloredBorderEffect = new DropShadow(BlurType.THREE_PASS_BOX, Color.BLACK, 2, 1, 0, 0);
         gc.setEffect(coloredBorderEffect);

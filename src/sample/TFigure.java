@@ -14,11 +14,24 @@ public abstract class TFigure {
         this.Y = Y;
         this.color = color;
     }
-    public abstract void MoveTo(double x, double y,GraphicsContext gc);
-    public abstract void show(GraphicsContext gc);
-    public abstract void black_border(GraphicsContext gc);
-    public abstract void white_border(GraphicsContext gc);
-    public abstract void delete(GraphicsContext gc);
+    public final void MoveTo(double x, double y,GraphicsContext gc){
+        delete(gc);
+        setX(getX()+x);
+        setY(getY()+y);
+
+    }
+    public void show(GraphicsContext gc){
+
+    }
+    public void black_border(GraphicsContext gc){
+
+    }
+    public void white_border(GraphicsContext gc){
+
+    }
+    public void delete(GraphicsContext gc){
+
+    }
 
     public double getY() {
         return Y;

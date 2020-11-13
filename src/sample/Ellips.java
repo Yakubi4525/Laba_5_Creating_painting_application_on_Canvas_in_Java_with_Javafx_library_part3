@@ -44,10 +44,6 @@ public class Ellips  extends Oval{
         DropShadow borber_white = new DropShadow(BlurType.THREE_PASS_BOX, getColor(), 2, 1, 0, 0);
         gc.setEffect(borber_white);
     }
-    public void MoveTo(double x, double y,GraphicsContext gc) {
-        delete(gc);
-        setX(getX()+x);
-        setY(getY()+y);
-    }
+
 
 }
